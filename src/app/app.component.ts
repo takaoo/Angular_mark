@@ -36,13 +36,13 @@ export class AppComponent {
   saveState = false;
   titleSaveState = false;
   markText = DATA[0].text;
+  currentId = DATA[0].id;
   items = DATA;
   items2 = DATA2;
   items3 = DATA3;
 
   i = 4;
 
-  currentId = 1;
 
   currentData = DATA[0].data;
 
@@ -61,12 +61,6 @@ export class AppComponent {
       } else if (this.currentData === 'DATA3') {
         this.savaText(DATA3);
       }
-      // console.log('edit -> save');
-      // this.markText = (document.getElementById('textarea') as HTMLInputElement).value;
-      // const index = DATA.findIndex(item => item.id === this.currentId);
-      // DATA[index].text = this.markText;
-      // document.getElementById('btn').innerHTML = 'edit';
-      // console.log(DATA);
     }
     this.saveState = !this.saveState;
   }
@@ -94,8 +88,6 @@ export class AppComponent {
     this.markText = item.text;
     this.currentId = item.id;
     this.currentData = item.data;
-    console.log('currentData', this.currentData);
-    console.log('currentId', this.currentId);
   }
 
   clickTitle() {
@@ -112,12 +104,6 @@ export class AppComponent {
       } else if (this.currentData === 'DATA3') {
         this.saveTitle(DATA3);
       }
-      // console.log('edit -> save');
-      // this.title = (document.getElementById('input') as HTMLInputElement).value;
-      // console.log(this.title);
-      // const index = DATA.findIndex(item => item.id === this.currentId);
-      // DATA[index].title = this.title;
-      // document.getElementById('titlebtn').innerHTML = 'edit';
     }
     this.titleSaveState = !this.titleSaveState;
   }
