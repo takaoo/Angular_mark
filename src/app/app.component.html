@@ -17,8 +17,8 @@
       <div *ngIf="item.level==1" class="main"><span (click)="call(item)">{{item.title}}</span>
         <button mat-raised-button [matMenuTriggerFor]="menu" style="margin:0 0 0 10px">Menu</button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="add(2,items)">Add 2nd Menu</button>
-          <button mat-menu-item (click)="add(3,items)">Add 3rd Menu</button>
+          <button mat-menu-item (click)="add(2,items2)">Add 2nd Menu</button>
+          <button mat-menu-item (click)="add(3,items2)">Add 3rd Menu</button>
         </mat-menu>
       </div>
       <div *ngIf="item.level==2" class="second"><span (click)="call(item)">{{item.title}}</span></div>
@@ -30,8 +30,8 @@
       <div *ngIf="item.level==1" class="main"><span (click)="call(item)">{{item.title}}</span>
         <button mat-raised-button [matMenuTriggerFor]="menu" style="margin:0 0 0 10px">Menu</button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="add(2,items)">Add 2nd Menu</button>
-          <button mat-menu-item (click)="add(3,items)">Add 3rd Menu</button>
+          <button mat-menu-item (click)="add(2,items3)">Add 2nd Menu</button>
+          <button mat-menu-item (click)="add(3,items3)">Add 3rd Menu</button>
         </mat-menu>
       </div>
       <div *ngIf="item.level==2" class="second"><span (click)="call(item)">{{item.title}}</span></div>

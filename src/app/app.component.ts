@@ -5,24 +5,25 @@ interface Data {
   level: number;
   title: string;
   text: string;
+  data: string;
 }
 
 const DATA: Data[] = [
-  { id: 1, level: 1, title: 'Main Menu', text: '# Sample Main' },
-  { id: 2, level: 2, title: '2nd Menu', text: '# Sample 2nd' },
-  { id: 3, level: 3, title: '3rd Menu', text: '# Sample 3rd' },
+  { id: 1, level: 1, title: 'Main Menu', text: '# Sample Main', data: 'DATA' },
+  { id: 2, level: 2, title: '2nd Menu', text: '# Sample 2nd', data: 'DATA' },
+  { id: 3, level: 3, title: '3rd Menu', text: '# Sample 3rd', data: 'DATA' },
 ];
 
 const DATA2: Data[] = [
-  { id: 1, level: 1, title: 'Main Menu', text: '# Sample Main' },
-  { id: 2, level: 2, title: '2nd Menu', text: '# Sample 2nd' },
-  { id: 3, level: 3, title: '3rd Menu', text: '# Sample 3rd' },
+  { id: 1, level: 1, title: 'Main Menu', text: '# Sample Main', data: 'DATA2' },
+  { id: 2, level: 2, title: '2nd Menu', text: '# Sample 2nd', data: 'DATA2' },
+  { id: 3, level: 3, title: '3rd Menu', text: '# Sample 3rd', data: 'DATA2' },
 ];
 
 const DATA3: Data[] = [
-  { id: 1, level: 1, title: 'Main Menu', text: '# Sample Main' },
-  { id: 2, level: 2, title: '2nd Menu', text: '# Sample 2nd' },
-  { id: 3, level: 3, title: '3rd Menu', text: '# Sample 3rd' },
+  { id: 1, level: 1, title: 'Main Menu', text: '# Sample Main', data: 'DATA3' },
+  { id: 2, level: 2, title: '2nd Menu', text: '# Sample 2nd', data: 'DATA3' },
+  { id: 3, level: 3, title: '3rd Menu', text: '# Sample 3rd', data: 'DATA3' },
 ];
 
 @Component({
@@ -42,6 +43,9 @@ export class AppComponent {
   i = 4;
 
   currentId = 1;
+
+  currentData = DATA[0].data;
+
   constructor() { }
 
   saveOrEdit() {
@@ -50,12 +54,19 @@ export class AppComponent {
       console.log('markText', this.markText);
       document.getElementById('btn').innerHTML = 'save';
     } else {
-      console.log('edit -> save');
-      this.markText = (document.getElementById('textarea') as HTMLInputElement).value;
-      const index = DATA.findIndex(item => item.id === this.currentId);
-      DATA[index].text = this.markText;
-      document.getElementById('btn').innerHTML = 'edit';
-      console.log(DATA);
+      if (this.currentData === 'DATA') {
+        this.savaText(DATA);
+      } else if (this.currentData === 'DATA2') {
+        this.savaText(DATA2);
+      } else if (this.currentData === 'DATA3') {
+        this.savaText(DATA3);
+      }
+      // console.log('edit -> save');
+      // this.markText = (document.getElementById('textarea') as HTMLInputElement).value;
+      // const index = DATA.findIndex(item => item.id === this.currentId);
+      // DATA[index].text = this.markText;
+      // document.getElementById('btn').innerHTML = 'edit';
+      // console.log(DATA);
     }
     this.saveState = !this.saveState;
   }
@@ -82,26 +93,51 @@ export class AppComponent {
     this.title = item.title;
     this.markText = item.text;
     this.currentId = item.id;
+    this.currentData = item.data;
+    console.log('currentData', this.currentData);
     console.log('currentId', this.currentId);
   }
 
   clickTitle() {
-    console.log('click');
+    console.log(this.currentData);
+
     if (this.titleSaveState === false) {
       console.log('save -> edit');
       document.getElementById('titlebtn').innerHTML = 'save';
     } else {
-      console.log('edit -> save');
-      this.title = (document.getElementById('input') as HTMLInputElement).value;
-      console.log(this.title);
-      const index = DATA.findIndex(item => item.id === this.currentId);
-      DATA[index].title = this.title;
-      console.log(index);
-      document.getElementById('titlebtn').innerHTML = 'edit';
+      if (this.currentData === 'DATA') {
+        this.saveTitle(DATA);
+      } else if (this.currentData === 'DATA2') {
+        this.saveTitle(DATA2);
+      } else if (this.currentData === 'DATA3') {
+        this.saveTitle(DATA3);
+      }
+      // console.log('edit -> save');
+      // this.title = (document.getElementById('input') as HTMLInputElement).value;
+      // console.log(this.title);
+      // const index = DATA.findIndex(item => item.id === this.currentId);
+      // DATA[index].title = this.title;
+      // document.getElementById('titlebtn').innerHTML = 'edit';
     }
     this.titleSaveState = !this.titleSaveState;
   }
 
+  saveTitle(data) {
+    console.log('edit -> save');
+    this.title = (document.getElementById('input') as HTMLInputElement).value;
+    console.log(this.title);
+    const index = DATA.findIndex(item => item.id === this.currentId);
+    data[index].title = this.title;
+    document.getElementById('titlebtn').innerHTML = 'edit';
+  }
+
+  savaText(data) {
+    console.log('edit -> save');
+    this.markText = (document.getElementById('textarea') as HTMLInputElement).value;
+    const index = DATA.findIndex(item => item.id === this.currentId);
+    data[index].text = this.markText;
+    document.getElementById('btn').innerHTML = 'edit';
+  }
 
 }
 
