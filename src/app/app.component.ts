@@ -15,15 +15,15 @@ const DATA: Data[] = [
 ];
 
 const DATA2: Data[] = [
-  { id: 1, level: 1, title: 'Main Menu', text: '# Sample Main', data: 'DATA2' },
-  { id: 2, level: 2, title: '2nd Menu', text: '# Sample 2nd', data: 'DATA2' },
-  { id: 3, level: 3, title: '3rd Menu', text: '# Sample 3rd', data: 'DATA2' },
+  { id: 4, level: 1, title: 'Main Menu', text: '# Sample Main', data: 'DATA2' },
+  { id: 5, level: 2, title: '2nd Menu', text: '# Sample 2nd', data: 'DATA2' },
+  { id: 6, level: 3, title: '3rd Menu', text: '# Sample 3rd', data: 'DATA2' },
 ];
 
 const DATA3: Data[] = [
-  { id: 1, level: 1, title: 'Main Menu', text: '# Sample Main', data: 'DATA3' },
-  { id: 2, level: 2, title: '2nd Menu', text: '# Sample 2nd', data: 'DATA3' },
-  { id: 3, level: 3, title: '3rd Menu', text: '# Sample 3rd', data: 'DATA3' },
+  { id: 7, level: 1, title: 'Main Menu', text: '# Sample Main', data: 'DATA3' },
+  { id: 8, level: 2, title: '2nd Menu', text: '# Sample 2nd', data: 'DATA3' },
+  { id: 9, level: 3, title: '3rd Menu', text: '# Sample 3rd', data: 'DATA3' },
 ];
 
 @Component({
@@ -41,7 +41,7 @@ export class AppComponent {
   items2 = DATA2;
   items3 = DATA3;
 
-  i = 4;
+  i = 10;
 
 
   currentData = DATA[0].data;
@@ -51,7 +51,6 @@ export class AppComponent {
   saveOrEdit() {
     if (this.saveState === false) {
       console.log('save -> edit');
-      console.log('markText', this.markText);
       document.getElementById('btn').innerHTML = 'save';
     } else {
       if (this.currentData === 'DATA') {
@@ -65,13 +64,27 @@ export class AppComponent {
     this.saveState = !this.saveState;
   }
 
-  add(item, items) {
-    console.log(items);
-    if (item === 2) {
-      items.push({ id: this.i, level: 2, title: '2nd Menu', text: '# Sample 2nd' });
-    } else if (item === 3) {
-      items.push({ id: this.i, level: 3, title: '3rd Menu', text: '# Sample 3rd' });
+  add(item, items, data) {
+    if (data === 'DATA') {
+      if (item === 2) {
+        items.push({ id: this.i, level: 2, title: '2nd Menu', text: '# Sample 2nd', data: 'DATA' });
+      } else if (item === 3) {
+        items.push({ id: this.i, level: 3, title: '3rd Menu', text: '# Sample 3rd', data: 'DATA' });
+      }
+    } else if (data === 'DATA2') {
+      if (item === 2) {
+        items.push({ id: this.i, level: 2, title: '2nd Menu', text: '# Sample 2nd', data: 'DATA2' });
+      } else if (item === 3) {
+        items.push({ id: this.i, level: 3, title: '3rd Menu', text: '# Sample 3rd', data: 'DATA2' });
+      }
+    } else if (data === 'DATA3') {
+      if (item === 2) {
+        items.push({ id: this.i, level: 2, title: '2nd Menu', text: '# Sample 2nd', data: 'DATA3' });
+      } else if (item === 3) {
+        items.push({ id: this.i, level: 3, title: '3rd Menu', text: '# Sample 3rd', data: 'DATA3' });
+      }
     }
+
     items.sort((a, b) => {
       if (a.level > b.level) {
         return 1;
@@ -79,7 +92,6 @@ export class AppComponent {
         return -1;
       }
     });
-    console.log(items);
     this.i++;
   }
 
@@ -91,10 +103,7 @@ export class AppComponent {
   }
 
   clickTitle() {
-    console.log(this.currentData);
-
     if (this.titleSaveState === false) {
-      console.log('save -> edit');
       document.getElementById('titlebtn').innerHTML = 'save';
     } else {
       if (this.currentData === 'DATA') {
@@ -109,10 +118,8 @@ export class AppComponent {
   }
 
   saveTitle(data) {
-    console.log('edit -> save');
     this.title = (document.getElementById('input') as HTMLInputElement).value;
-    console.log(this.title);
-    const index = DATA.findIndex(item => item.id === this.currentId);
+    const index = data.findIndex(item => item.id === this.currentId);
     data[index].title = this.title;
     document.getElementById('titlebtn').innerHTML = 'edit';
   }
@@ -120,7 +127,7 @@ export class AppComponent {
   savaText(data) {
     console.log('edit -> save');
     this.markText = (document.getElementById('textarea') as HTMLInputElement).value;
-    const index = DATA.findIndex(item => item.id === this.currentId);
+    const index = data.findIndex(item => item.id === this.currentId);
     data[index].text = this.markText;
     document.getElementById('btn').innerHTML = 'edit';
   }
