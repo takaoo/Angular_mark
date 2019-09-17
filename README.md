@@ -9,5 +9,7 @@ npm install -g @angular/cli
 
 # ビルド方法
 cd Angular_mark
+
 npm install 
+
 ng build
