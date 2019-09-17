@@ -1,0 +1,70 @@
+<div fxLayout="row" style="height: 800px">
+  <div fxFlex=25 fxLayoutAlign="center left" fxLayout="column">
+    <div *ngFor="let item of items">
+      <div *ngIf="item.level==1" class="main"><span (click)="call(item)">{{item.title}}</span>
+        <button mat-raised-button [matMenuTriggerFor]="menu" style="margin:0 0 0 10px">Menu</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="add(2,items)">Add 2nd Menu</button>
+          <button mat-menu-item (click)="add(3,items)">Add 3rd Menu</button>
+        </mat-menu>
+      </div>
+      <div *ngIf="item.level==2" class="second"><span (click)="call(item)">{{item.title}}</span></div>
+      <div *ngIf="item.level==3" class="third"><span (click)="call(item)">{{item.title}}</span></div>
+    </div>
+    <br>
+
+    <div *ngFor="let item of items2">
+      <div *ngIf="item.level==1" class="main"><span (click)="call(item)">{{item.title}}</span>
+        <button mat-raised-button [matMenuTriggerFor]="menu" style="margin:0 0 0 10px">Menu</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="add(2,items)">Add 2nd Menu</button>
+          <button mat-menu-item (click)="add(3,items)">Add 3rd Menu</button>
+        </mat-menu>
+      </div>
+      <div *ngIf="item.level==2" class="second"><span (click)="call(item)">{{item.title}}</span></div>
+      <div *ngIf="item.level==3" class="third"><span (click)="call(item)">{{item.title}}</span></div>
+    </div>
+    <br>
+
+    <div *ngFor="let item of items3">
+      <div *ngIf="item.level==1" class="main"><span (click)="call(item)">{{item.title}}</span>
+        <button mat-raised-button [matMenuTriggerFor]="menu" style="margin:0 0 0 10px">Menu</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="add(2,items)">Add 2nd Menu</button>
+          <button mat-menu-item (click)="add(3,items)">Add 3rd Menu</button>
+        </mat-menu>
+      </div>
+      <div *ngIf="item.level==2" class="second"><span (click)="call(item)">{{item.title}}</span></div>
+      <div *ngIf="item.level==3" class="third"><span (click)="call(item)">{{item.title}}</span></div>
+    </div>
+  </div>
+
+  <div fxFlex=75>
+    <div fxLayout="row">
+      <div fxFlex=80 *ngIf="titleSaveState===true">
+        <mat-form-field style="width: 100%;">
+          <input id="input" matInput placeholder="title" value={{title}} style="font-size: 24px">
+        </mat-form-field>
+      </div>
+      <div *ngIf="titleSaveState===false" fxFlex=80 id="title" style="font-size: 40px; font-weight: bold">{{title}}
+      </div>
+      <button fxFlex=20 id=titlebtn mat-raised-button (click)="clickTitle()">edit</button>
+    </div>
+
+    <br>
+    <mat-divider></mat-divider><br>
+
+    <div fxLayout="column">
+      <button fxFlex=20 id=btn mat-raised-button (click)="saveOrEdit()"
+        style="width: 200px; margin:0 0 0 auto">edit</button>
+      <mat-form-field fxFlex=80 *ngIf="saveState===true" floatLabel="always">
+        <textarea matInput id="textarea" placeholder="content"
+          style="height: 400px;width: 1000px; padding: 30px; font-size: 20px;resize: none">{{markText}}</textarea>
+      </mat-form-field>
+      <div fxFlex=80 *ngIf="saveState===false" id="output">
+        <markdown [data]="markText" style="font-size: 20px"></markdown>
+      </div>
+    </div>
+
+  </div>
+</div>
